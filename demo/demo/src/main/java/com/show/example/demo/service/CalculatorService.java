@@ -3,6 +3,7 @@ package com.show.example.demo.service;
 import com.show.example.demo.DataService;
 import com.show.example.demo.FxService;
 import com.show.example.demo.service.model.FxRate;
+import com.show.example.demo.util.CurrencyUtil;
 
 import java.util.List;
 
@@ -59,16 +60,12 @@ public class CalculatorService {
 
     public String findCurrencyName(String currecy) {
 
-        if("Euro".equalsIgnoreCase(currecy)){
-            return getDefaultCurrencyName();
+        if(null != currecy){
+            return getCurrencyName(currecy);
         } else
-
         return "Not Foumd";
     }
 
-    private String getDefaultCurrencyName() {
-            return "Euro";
-    }
 
     private static String getCurrencyName(String currency) {
         if("USD".equalsIgnoreCase(currency)){
@@ -78,6 +75,16 @@ public class CalculatorService {
         }else{
             return "Euro";
         }
+    }
+
+
+
+    public String findCurrencyName1(String currecy) {
+
+        if(null != currecy){
+            return CurrencyUtil.getCurrencyName(currecy);
+        } else
+            return "Not Foumd";
     }
 
 }
