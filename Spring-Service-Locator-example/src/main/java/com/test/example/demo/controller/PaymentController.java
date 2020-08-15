@@ -40,7 +40,7 @@ public class PaymentController {
         }
     }
 
-
+    
     @PostMapping("/paymentOnline")
     public String paymentOnline(@RequestBody PaymentRequest request) {
         return registry.getServiceBean(request.getPaymentMethod()).pay(request);
