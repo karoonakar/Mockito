@@ -21,5 +21,5 @@ public class PaymentSelector {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Payment method not supported: " + paymentMethod));
     }
-    
+
 }
