@@ -8,14 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppConfig {
-
-	@Bean
-	public FactoryBean<?> getBean() {
-		ServiceLocatorFactoryBean bean = new ServiceLocatorFactoryBean();
-		bean.setServiceLocatorInterface(PaymentRegistry.class);
-		return bean;
-	}
+public class AppConfig3 {
 
 	@Bean
 	public PaymentService getGooglePay() {

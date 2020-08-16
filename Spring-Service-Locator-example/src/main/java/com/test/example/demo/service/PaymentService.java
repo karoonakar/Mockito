@@ -7,4 +7,6 @@ public interface PaymentService {
 
 	String pay(PaymentRequest request);
 
+	boolean paidBy(String paymentMethod);
+
 }

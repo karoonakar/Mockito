@@ -2,8 +2,6 @@ package com.test.example.demo.controller;
 
 
 import com.test.example.demo.dto.PaymentRequest;
-import com.test.example.demo.service.PaymentRegistry;
-import com.test.example.demo.service.PaymentSelector;
 import com.test.example.demo.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,49 +9,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PaymentController {
-
-    @Autowired
-    PaymentRegistry registry;
+public class PaymentController1 {
 
     @Autowired
     private PaymentService paytm;
 
     @Autowired
-    private PaymentService googlePay;
+    private PaymentService googlepay;
 
     @Autowired
-    private PaymentService visaPay;
-
-    @Autowired
-    private PaymentSelector paymentSelector;
+    private PaymentService visapay;
 
 
     @PostMapping("/payOnline")
     public String payOnline(@RequestBody PaymentRequest request)  {
 
-        if (request.getPaymentMethod().equals("paytm")) {
+        if (request.getPaymentMethod().toLowerCase().equals("paytm")) {
             return paytm.pay(request);
         }
-        if (request.getPaymentMethod().equals("googlePay")) {
-            return googlePay.pay(request);
+        if (request.getPaymentMethod().toLowerCase().equals("googlepay")) {
+            return googlepay.pay(request);
         }
-        if (request.getPaymentMethod().equals("visaPay")) {
-            return visaPay.pay(request);
+        if (request.getPaymentMethod().toLowerCase().equals("visapay")) {
+            return visapay.pay(request);
         } else {
             return "Invalid Payment Method...";
         }
-    }
-
-
-    @PostMapping("/paymentOnline")
-    public String paymentOnline(@RequestBody PaymentRequest request) {
-        return registry.getServiceBean(request.getPaymentMethod()).pay(request);
-    }
-
-    @PostMapping("/payment")
-    public String payment(@RequestBody PaymentRequest request) {
-        return  paymentSelector.getPaymentService(request.getPaymentMethod()).pay(request);
     }
 
 }

@@ -12,4 +12,9 @@ public class Paytm implements PaymentService {
 		return request.getAmount() + "$ Payment done using: " + request.getPaymentMethod();
 	}
 
+	@Override
+	public boolean paidBy(String paymentMethod) {
+		return paymentMethod.equalsIgnoreCase("paytm");
+	}
+
 }

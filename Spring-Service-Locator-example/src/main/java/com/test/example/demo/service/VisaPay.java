@@ -4,7 +4,7 @@ package com.test.example.demo.service;
 import com.test.example.demo.dto.PaymentRequest;
 import org.springframework.stereotype.Service;
 
-@Service("visaPay")
+@Service("visapay")
 public class VisaPay implements PaymentService {
 
 	@Override
@@ -12,4 +12,8 @@ public class VisaPay implements PaymentService {
 		return request.getAmount() + "$ Payment done using: " + request.getPaymentMethod();
 	}
 
+	@Override
+	public boolean paidBy(String paymentMethod) {
+		return paymentMethod.equalsIgnoreCase("visaPay");
+	}
 }
