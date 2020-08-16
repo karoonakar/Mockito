@@ -2,7 +2,9 @@ package com.test.example.demo.controller;
 
 
 import com.test.example.demo.dto.PaymentRequest;
-import com.test.example.demo.service.*;
+import com.test.example.demo.service.PaymentRegistry;
+import com.test.example.demo.service.PaymentSelector;
+import com.test.example.demo.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,9 @@ public class PaymentController {
     @Autowired
     private PaymentService visaPay;
 
+    @Autowired
+    private PaymentSelector paymentSelector;
+
 
     @PostMapping("/payOnline")
     public String payOnline(@RequestBody PaymentRequest request)  {
@@ -40,10 +45,15 @@ public class PaymentController {
         }
     }
 
-    
+
     @PostMapping("/paymentOnline")
     public String paymentOnline(@RequestBody PaymentRequest request) {
         return registry.getServiceBean(request.getPaymentMethod()).pay(request);
+    }
+
+    @PostMapping("/payment")
+    public String payment(@RequestBody PaymentRequest request) {
+        return  paymentSelector.getPaymentService(request.getPaymentMethod()).pay(request);
     }
 
 }
